@@ -21,17 +21,28 @@ TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite img = TFT_eSprite(&tft);
 TFT_eSprite txt = TFT_eSprite(&tft);
 
+#define  maxLine 12
 
 //--- music task
 TaskHandle_t TaskHandle0 = NULL;
 uint8_t za, zb, zc, zx;
-String scrollText[5] = {
+const String scrollText[maxLine] = {
     "[ Real Time OS + Sprite Testing ]",
     "Music runs on CORE-0 / Graphic runs on CORE-1",
     "SPRITE: Text scrolling / X-Wing Fighter",
     "=============================================",
-    "A long time ago in a galaxy far, far away....",
+    "A long time ago in a galaxy far, far away...",
+    "The dead speak! The galaxy has heard a mysterious",
+    "broadcast, a threat of REVENGE, in the",
+    "sinister voice of the late EMPEROR PALPATINE.",
+    "GENERAL LEIA ORGANA dispatches secret agents",
+    "to gather intelligence, while REY, the last",
+    "hope of the Jedi, trains for battle against",
+    "the diabolical FIRST ORDER."
+
 };
+
+
 uint8_t rng() {
   zx++;
   za = (za^zc^zx);
@@ -51,7 +62,7 @@ void TaskPlayMusic(void *pvParameters) {
 void StarField() {//start field effect
 //#define roll
   img.createSprite(124,59);
-  txt.createSprite(320,80);
+  txt.createSprite(320,120);
 #ifdef roll
 #else  
   img.setSwapBytes(true);
@@ -95,32 +106,7 @@ void StarField() {//start field effect
       }
     }
   }
-  //draw text on screen
-  tft.drawFastHLine(0,35,320,TFT_RED);
-  tft.setTextColor(random(0xffff));//draw next text
-  tft.drawCentreString("RTOS TEST",159,3,4);
-  tft.setTextColor(TFT_WHITE,TFT_RED);
-  tft.drawCentreString("[- Press button to pause -]",159,225,2);
 
-  //draw scroll text on sprite
-  txt.setTextColor(TFT_BLACK);//delete old text
-  for (int i = 0;i<5;i++) 
-      if (scrolly+i*15 > 0) {
-    txt.drawCentreString(scrollText[i],159,scrolly+i*15,2); 
-    }
-
-  scrolly--;
-  if (scrolly < -50) scrolly = 80;
-
-  txt.setTextColor(TFT_YELLOW);//draw next text
-  for (int i = 0;i<5;i++) {
-    if (scrolly+i*15 > 0) {
-    txt.drawCentreString(scrollText[i],159,scrolly+i*15,2); 
-   // Serial.println(scrolly+i*15);
-    }
-
-  }
-  txt.pushSprite(0,45);//put sprite 
 
   //draw x-wing
   int8_t rolls = random(-1,2);
@@ -137,6 +123,36 @@ void StarField() {//start field effect
   img.pushSprite(curx,cury);//show sprite
 
 #endif  
+
+
+  //draw text on screen
+  tft.drawFastHLine(0,219,320,TFT_GREEN);
+  tft.setTextColor(random(0xffff));//draw next text
+  tft.drawString("RTOS TEST",0,221,4);
+  tft.setTextColor(TFT_WHITE,TFT_RED);
+  tft.drawRightString("[- Press button to pause -]",319,225,2);
+
+  //draw scroll text on sprite
+  txt.setTextColor(TFT_BLACK);//delete old text
+  for (int i = 0;i<maxLine;i++) 
+      if (scrolly+i*15 > 0) {
+    txt.drawCentreString(scrollText[i],159,scrolly+i*15,2); 
+    }
+
+  scrolly--;
+  if (scrolly < -200) scrolly = 120;
+
+  txt.setTextColor(TFT_ORANGE);//draw next text
+  for (int i = 0;i<maxLine;i++) {
+    if (scrolly+i*15 > 0) {
+    txt.drawCentreString(scrollText[i],159,scrolly+i*15,2); 
+   // Serial.println(scrolly+i*15);
+    }
+
+  }
+  txt.pushSprite(0,0);//put sprite 
+
+  
   if (digitalRead(SELECTOR_PIN) == LOW) {
     press = false;
   } 
@@ -164,26 +180,11 @@ void setup() {
   tft.setRotation(1);
   tft.fillScreen(TFT_BLACK);
   tft.setSwapBytes(true);
-  ledcWriteTone(buzzerChannel,880);
-  delay(100);
-  ledcWriteTone(buzzerChannel,2093);
-  delay(100);
-  ledcWriteTone(buzzerChannel,1319);
-  delay(1000);
-   ledcWriteTone(buzzerChannel,880);
-  delay(100);
-  ledcWriteTone(buzzerChannel,2093);
-  delay(100);
-  ledcWriteTone(buzzerChannel,1319);
-  delay(1000);
-   ledcWriteTone(buzzerChannel,880);
-  delay(100);
-  ledcWriteTone(buzzerChannel,2093);
-  delay(100);
-  ledcWriteTone(buzzerChannel,1319);
-  delay(100);
+  tft.drawCentreString("Push button to start",159,120,4);
+
   ledcWriteTone(buzzerChannel,0);
   Serial.println(array_length(starwars));//total 5 type of display page)
+
 }
 //----------------------------
 void loop()
