@@ -6,4 +6,4 @@ ESP32 test run sketch on 2 Cores separately
   
 [Youtube](https://youtube.com/shorts/Et4VN0_Gafw?feature=share)
 
-![Image](Screenshot_1.jpg)
+![Image](rtos.jpg)
