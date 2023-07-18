@@ -9,5 +9,5 @@ ESP32 test run sketch on 2 Cores separately
 ![Image](rtos.jpg)
 
 this project use add-on library from
-https://github.com/connornishijima/Cartridge
-https://github.com/Bodmer/TFT_eSPI
+[Nes Audio](https://github.com/connornishijima/Cartridge)
+[TFT Dsiplay](https://github.com/Bodmer/TFT_eSPI)
