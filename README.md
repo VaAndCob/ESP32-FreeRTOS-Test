@@ -4,6 +4,6 @@ ESP32 test run sketch on 2 Cores separately
 - Core 0 Animation
 - Core 1 Nes Music Emulator
   
-[Youtube](https://youtube.com/shorts/Et4VN0_Gafw?feature=share)
+[Youtube]([https://youtube.com/shorts/Et4VN0_Gafw?feature=share](https://youtu.be/w-QqZ7T1ar8)https://youtu.be/w-QqZ7T1ar8])
 
 ![Image](rtos.jpg)
