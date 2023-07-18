@@ -21,7 +21,7 @@ TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite img = TFT_eSprite(&tft);
 TFT_eSprite txt = TFT_eSprite(&tft);
 
-#define  maxLine 12
+#define  maxLine 11
 
 //--- music task
 TaskHandle_t TaskHandle0 = NULL;
@@ -31,7 +31,6 @@ const String scrollText[maxLine] = {
     "Music runs on CORE-0 / Graphic runs on CORE-1",
     "SPRITE: Text scrolling / X-Wing Fighter",
     "=============================================",
-    "A long time ago in a galaxy far, far away...",
     "The dead speak! The galaxy has heard a mysterious",
     "broadcast, a threat of REVENGE, in the",
     "sinister voice of the late EMPEROR PALPATINE.",
@@ -135,8 +134,8 @@ void StarField() {//start field effect
   //draw scroll text on sprite
   txt.setTextColor(TFT_BLACK);//delete old text
   for (int i = 0;i<maxLine;i++) 
-      if (scrolly+i*15 > 0) {
-    txt.drawCentreString(scrollText[i],159,scrolly+i*15,2); 
+      if (scrolly+i*25 > 0) {
+    txt.drawCentreString(scrollText[i],159,scrolly+i*25,2); 
     }
 
   scrolly--;
@@ -144,8 +143,8 @@ void StarField() {//start field effect
 
   txt.setTextColor(TFT_ORANGE);//draw next text
   for (int i = 0;i<maxLine;i++) {
-    if (scrolly+i*15 > 0) {
-    txt.drawCentreString(scrollText[i],159,scrolly+i*15,2); 
+    if (scrolly+i*25 > 0) {
+    txt.drawCentreString(scrollText[i],159,scrolly+i*25,2); 
    // Serial.println(scrolly+i*15);
     }
 
@@ -195,6 +194,11 @@ void loop()
  
     if (press) {  
       delay(500);
+      tft.fillScreen(TFT_BLACK);
+      tft.setTextColor(0x043f);
+      tft.drawString("A long time ago in a galaxy far,",0,100,4);
+      tft.drawString("far away....",0,140,4);
+      delay(3000);
       Serial.println("PLAY");
       xTaskCreatePinnedToCore(//start play animation
       &TaskPlayMusic
@@ -204,6 +208,9 @@ void loop()
       , 2 //Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
       , &TaskHandle0
       , 0);//core0      
+      tft.fillScreen(TFT_BLACK);
+      tft.pushImage(39,69,STAR_WARS_WIDTH,STAR_WARS_HEIGHT,STAR_WARS);//show sdcard icon
+      delay(5000);
       StarField();//play star field animation  
       tft.setTextColor(TFT_BLACK,TFT_VIOLET);
       tft.drawCentreString("PAUSE",159,110,4);    
