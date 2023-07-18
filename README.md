@@ -11,3 +11,7 @@ ESP32 test run sketch on 2 Cores separately
 this project use add-on library from
 [Nes Audio](https://github.com/connornishijima/Cartridge)
 [TFT Dsiplay](https://github.com/Bodmer/TFT_eSPI)
+
+## Hardware
+- ESP32 TFT2.8 320x240 with touch board. https://www.youtube.com/watch?v=d2OXlVcRYrU
+- A small speaker for mobile phone 1Watt
