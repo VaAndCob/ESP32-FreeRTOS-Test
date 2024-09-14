@@ -14,6 +14,6 @@ this project use add-on library from
 
 ## Hardware
 - ESP32 TFT2.8 320x240 with "RESISTIVE" touch board.
-  buy here https://s.click.aliexpress.com/e/_Ew95gMl
+  buy here (https://s.click.aliexpress.com/e/_Ew95gMl)
  https://www.youtube.com/watch?v=d2OXlVcRYrU
 - A small speaker for mobile phone 1Watt
