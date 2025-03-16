@@ -12,6 +12,11 @@ this project use add-on library from
 [Nes Audio](https://github.com/connornishijima/Cartridge)
 [TFT Dsiplay](https://github.com/Bodmer/TFT_eSPI)
 
+## Software:
+- Arduino IDE 2.3.2 + ESP32 arduino core 2.0.17
+- * IMPORTANT * this project won't work with ESP32 arduiino core 3.x.x
+- modified TFT_eSPI library 2.5.43
+  
 ## Hardware
 - ESP32 TFT2.8 320x240 with "RESISTIVE" touch board.
   buy here (https://s.click.aliexpress.com/e/_Ew95gMl)
